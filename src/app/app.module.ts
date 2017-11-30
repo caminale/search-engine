@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule, MatStepperModule } from '@angular/material';
+import { MatAutocompleteModule, MatStepperModule} from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -22,7 +22,7 @@ const appRoutes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'private', component: PrivateComponent},
+  { path: 'private', component: PrivateComponent}
 ];
 
 @NgModule({

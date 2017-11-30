@@ -54,7 +54,6 @@ export class PrivateComponent {
         startWith(''),
         map((state: string) => state ? this.filterStates(state) : this.states.slice())
       );
-    console.log(this.stateCtrl.valueChanges);
   }
 
   filterStates(name: string) {
