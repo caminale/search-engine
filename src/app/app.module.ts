@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { PrivateComponent } from './private/private.component';
 import { RomanizePipe } from './romanize.pipe';
 import { AuthentificationService } from './authentification.service';
+import { DisplayDataComponent } from './display-data/display-data.component';
 
 
 const appRoutes: Routes = [
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     PrivateComponent,
-    RomanizePipe
+    RomanizePipe,
+    DisplayDataComponent
   ],
   imports: [
     BrowserModule,

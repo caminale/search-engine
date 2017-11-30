@@ -48,7 +48,6 @@ export class PrivateComponent {
 
   constructor() {
     this.stateCtrl = new FormControl();
-
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -60,5 +59,6 @@ export class PrivateComponent {
     return this.states.filter(state =>
       state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
+
 
 }
