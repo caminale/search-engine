@@ -18,6 +18,8 @@ export class State {
 export class PrivateComponent {
   stateCtrl: FormControl;
   filteredStates: Observable<any[]>;
+  isFilter : Boolean = false;
+  public  coworkerListFiltering =  [];
 
   states: State[] = [
     {
@@ -50,14 +52,20 @@ export class PrivateComponent {
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
-        map((state: string) => state ? this.filterStates(state) : [{}])
+        map((state: string) => state ? this.filterStates(state) : [{}]),
       );
+    this.stateCtrl.valueChanges.subscribe(value => {
+      this.isFilter = value.length === 0 ? false : true;
+      console.log( this.isFilter);
+    });
   }
 
   filterStates(name: string) {
-    return this.states.filter(state =>
-      state.name.toLowerCase().indexOf(name.toLowerCase()) === 0 ||
-      state.firstName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    this.coworkerListFiltering = this.states.filter(state =>
+    state.name.toLowerCase().indexOf(name.toLowerCase()) === 0 ||
+    state.firstName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    this.isFilter = this.coworkerListFiltering.length === 0 ? false : true;
+    return this.coworkerListFiltering;
   }
 
 
