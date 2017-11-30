@@ -18,7 +18,6 @@ export class State {
 export class PrivateComponent {
   stateCtrl: FormControl;
   filteredStates: Observable<any[]>;
-
   states: State[] = [
     {
       name: 'Basson',
@@ -50,7 +49,7 @@ export class PrivateComponent {
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
-        map((state: string) => state ? this.filterStates(state) : [{}])
+        map((state: string) => state ? this.filterStates(state) : null)
       );
   }
 
