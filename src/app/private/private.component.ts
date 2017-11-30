@@ -20,6 +20,11 @@ export class State {
 export class PrivateComponent {
   stateCtrl: FormControl;
   filteredStates: Observable<any[]>;
+  jobs = [
+    {value: 'cto-0', viewValue: 'CTO'},
+    {value: 'ceo-1', viewValue: 'CEO'},
+    {value: 'hr-2', viewValue: 'HR'}
+  ];
   states: State[] = [
     {
       name: 'Basson',
