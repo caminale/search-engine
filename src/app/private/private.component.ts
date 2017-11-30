@@ -59,4 +59,5 @@ export class PrivateComponent {
       state.firstName.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
+
 }
