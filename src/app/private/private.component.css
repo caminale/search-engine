@@ -10,7 +10,10 @@
 .example-full-width {
   width: 100%;
 }
-
+.formContainer {
+  margin-right: auto;
+  margin-left: auto;
+}
 select {
   width: 100%;
   padding: 12px 20px;
