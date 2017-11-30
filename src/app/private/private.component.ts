@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
+import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
+import {isNullOrUndefined} from "util";
+import {isUndefined} from "util";
 
 export class State {
   constructor(public name: string, public firstName: string, public job: string,
@@ -17,11 +20,18 @@ export class State {
 })
 
 export class PrivateComponent {
+  selectedJob: string;
   stateCtrl: FormControl;
+  selectCtrl: FormControl;
   filteredStates: Observable<any[]>;
   isFilter : Boolean = false;
   public  coworkerListFiltering =  [];
 
+  jobs = [
+    {value: 'cto-0', viewValue: 'CTO'},
+    {value: 'ceo-1', viewValue: 'CEO'},
+    {value: 'hr-2', viewValue: 'HR'}
+  ];
   states: State[] = [
     {
       name: 'Basson',
@@ -55,6 +65,7 @@ export class PrivateComponent {
 
   constructor() {
     this.stateCtrl = new FormControl();
+    this.selectCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
         map((state: string) => state ? this.filterStates(state) : null)
@@ -63,15 +74,26 @@ export class PrivateComponent {
       this.isFilter = value.length === 0 ? false : true;
       console.log( this.isFilter);
     });
+    this.selectCtrl.valueChanges.subscribe(value => {
+      if(value)
+      this.coworkerListFiltering = this.states.filter(worker => worker.job == value.split('-')[0].toUpperCase());
+      this.isFilter=true;
+    });
   }
-
   filterStates(name: string) {
-    this.coworkerListFiltering = this.states.filter(state =>
-    state.name.toLowerCase().indexOf(name.toLowerCase()) === 0 ||
-    state.firstName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    if(this.selectedJob !== undefined){
+      const dataList = this.states.filter(worker => worker.job == this.selectedJob.split('-')[0].toUpperCase());
+      return this.filteringData(name, dataList);
+    }
+    else{
+      return this.filteringData(name, this.states);
+    }
+  }
+  filteringData(dataEnter: string, data){
+    this.coworkerListFiltering = data.filter(state =>
+    state.name.toLowerCase().indexOf(dataEnter.toLowerCase()) === 0 ||
+    state.firstName.toLowerCase().indexOf(dataEnter.toLowerCase()) === 0);
     this.isFilter = this.coworkerListFiltering.length === 0 ? false : true;
     return this.coworkerListFiltering;
   }
-
-
 }

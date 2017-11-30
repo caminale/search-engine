@@ -11,17 +11,19 @@
              [matAutocomplete]="auto" [formControl]="stateCtrl">
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let state of filteredStates | async "
-                    [value]="state.name">
+                    [value]="state.firstName + ' ' + state.name">
           <span>{{ state.firstName }}</span>
           <span>{{state.name}}</span>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <select id="job" name="job">
-      <option value="CTO">CTO</option>
-      <option value="CEO">CEO</option>
-      <option value="HR">HR</option>
-    </select>
+      <mat-form-field>
+        <mat-select placeholder="job" [(ngModel)]="selectedJob" name="job" [formControl]="selectCtrl">
+          <mat-option *ngFor="let job of jobs" [value]="job.value">
+            {{ job.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     <div class="buttons">
       <button class="button buttonBlack">Search</button>
       <button class="button buttonBlack">Search All</button>
@@ -31,4 +33,5 @@
 </div>
 <app-display-data [arrayDataFiltered]="coworkerListFiltering"  [arrayData]="states" [isFilter]="isFilter"
 ></app-display-data>
+
 
