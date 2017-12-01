@@ -8,10 +8,10 @@
     <div class="formContainer">
     <mat-form-field class="example-full-width">
       <input matInput placeholder="co-worker" aria-label="co-worker"
-             [matAutocomplete]="auto" [formControl]="stateCtrl">
+             [matAutocomplete]="auto" [formControl]="nameInputCtrl">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let state of filteredStates | async "
-                    [value]="state.firstName + ' ' + state.name">
+        <mat-option *ngFor="let state of auCompletedList | async "
+          [value]="state.firstName + ' ' + state.name">
           <span>{{ state.firstName }}</span>
           <span>{{state.name}}</span>
         </mat-option>
@@ -25,13 +25,13 @@
         </mat-select>
       </mat-form-field>
     <div class="buttons">
-      <button class="button buttonBlack">Search</button>
+      <button class="button buttonBlack" (click)="onClickSearch()">Search</button>
       <button class="button buttonBlack">Search All</button>
     </div>
     </div>
   </form>
 </div>
-<app-display-data [arrayDataFiltered]="coworkerListFiltering"  [arrayData]="states" [isFilter]="isFilter"
+<app-display-data [arrayDataFiltered]="coworkerListFiltering"
 ></app-display-data>
 
 

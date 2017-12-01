@@ -6,15 +6,12 @@ import { Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./display-data.component.css']
 })
 export class DisplayDataComponent implements OnInit {
-  @Input('arrayData') coWorker;
-  @Input('arrayDataFiltered') coWorkerFiltered;
-  @Input('isFilter') isFilter;
+  @Input('arrayDataFiltered') coWorker;
 
   constructor() {
   }
 
   ngOnInit() {
-    console.log(this.isFilter);
   }
 
 }

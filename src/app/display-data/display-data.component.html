@@ -1,14 +1,9 @@
 <p>
   show data
 </p>
-<ul *ngIf="!isFilter">
-  <li *ngFor="let worker of coWorker">
-    {{ worker.name }}
-  </li>
-</ul>
 
-<ul *ngIf="isFilter">
-  <li  *ngFor="let worker of coWorkerFiltered">
+<ul>
+  <li *ngFor="let worker of coWorker">
     {{ worker.name }}
     {{worker.firstName}}
     <img style="vertical-align:middle;" aria-hidden src="{{worker.picture}}" height="25" />

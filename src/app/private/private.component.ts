@@ -18,11 +18,12 @@ export class State {
 
 export class PrivateComponent {
   selectedJob: string;
-  stateCtrl: FormControl;
+  filteredUser: {};
+  showResults: Boolean = false;
+  nameInputCtrl: FormControl;
   selectCtrl: FormControl;
-  filteredStates: Observable<any[]>;
-  isFilter: Boolean = false;
-  public  coworkerListFiltering =  [];
+  auCompletedList: Observable<any[]>;
+  coworkerListFiltering: any[];
 
   jobs = [
     {value: 'cto-0', viewValue: 'CTO'},
@@ -42,7 +43,7 @@ export class PrivateComponent {
       firstName: 'Loic',
       // https://commons.wikimedia.org/wiki/File:Flag_of_California.svg
       picture: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
-      job : 'HR'
+      job: 'HR'
     },
     {
       name: 'Nabhan',
@@ -56,41 +57,46 @@ export class PrivateComponent {
       firstName: 'Thomas',
       // https://commons.wikimedia.org/wiki/File:Flag_of_Texas.svg
       picture: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
-      job : 'HR'
+      job: 'HR'
     }
   ];
 
   constructor() {
-    this.stateCtrl = new FormControl();
+    this.nameInputCtrl = new FormControl();
     this.selectCtrl = new FormControl();
-    this.filteredStates = this.stateCtrl.valueChanges
+    this.auCompletedList = this.nameInputCtrl.valueChanges
       .pipe(
-        map((state: string) => state ? this.filterStates(state) : null)
+        map((state: string) => state ? this.filteringDataByName(state, this.states) : null)
       );
-    this.stateCtrl.valueChanges.subscribe(value => {
-      this.isFilter = value.length === 0 ? false : true;
-      console.log( this.isFilter);
+    this.nameInputCtrl.valueChanges.subscribe(value => {
     });
     this.selectCtrl.valueChanges.subscribe(value => {
       if (value) {
-        this.coworkerListFiltering = this.states.filter(worker => worker.job === value.split('-')[0].toUpperCase());
-        this.isFilter = true;
       }
     });
   }
-  filterStates(name: string) {
+
+  filteringDataByName(dataEnter: string, data) {
+    const returnValue = data.filter(state =>
+      (state.name + ' ' + state.firstName).toLowerCase().indexOf(dataEnter.toLowerCase()) === 0 ||
+      (state.firstName + ' ' + state.name).toLowerCase().indexOf(dataEnter.toLowerCase()) === 0);
+    console.log(returnValue);
+    this.filteredUser = returnValue;
+    return (returnValue);
+  }
+
+  onClickSearch() {
+    let Result = [];
     if (this.selectedJob !== undefined) {
-      const dataList = this.states.filter(worker => worker.job === this.selectedJob.split('-')[0].toUpperCase());
-      return this.filteringData(name, dataList);
+      Result = this.states.filter(worker => worker.job === this.selectCtrl.value.split('-')[0].toUpperCase());
     }else {
-      return this.filteringData(name, this.states);
+      Result = this.states;
     }
+    if (this.nameInputCtrl.value.length !== 0) {
+      Result = this.filteringDataByName(this.nameInputCtrl.value, Result);
+    }
+    this.coworkerListFiltering = Result;
+    console.log('ONCLICKSEARCH ' + JSON.stringify(Result, null, 2));
   }
-  filteringData(dataEnter: string, data) {
-    this.coworkerListFiltering = data.filter(state =>
-    state.name.toLowerCase().indexOf(dataEnter.toLowerCase()) === 0 ||
-    state.firstName.toLowerCase().indexOf(dataEnter.toLowerCase()) === 0);
-    this.isFilter = this.coworkerListFiltering.length === 0 ? false : true;
-    return this.coworkerListFiltering;
-  }
+
 }
