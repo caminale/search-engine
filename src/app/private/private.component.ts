@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
 
 export class State {
