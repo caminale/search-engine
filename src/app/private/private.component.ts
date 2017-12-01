@@ -3,8 +3,6 @@ import {FormControl} from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators/map';
-import {isNullOrUndefined} from "util";
-import {isUndefined} from "util";
 
 export class State {
   constructor(public name: string, public firstName: string, public job: string,
@@ -23,7 +21,7 @@ export class PrivateComponent {
   stateCtrl: FormControl;
   selectCtrl: FormControl;
   filteredStates: Observable<any[]>;
-  isFilter : Boolean = false;
+  isFilter: Boolean = false;
   public  coworkerListFiltering =  [];
 
   jobs = [
@@ -74,21 +72,21 @@ export class PrivateComponent {
       console.log( this.isFilter);
     });
     this.selectCtrl.valueChanges.subscribe(value => {
-      if(value)
-      this.coworkerListFiltering = this.states.filter(worker => worker.job == value.split('-')[0].toUpperCase());
-      this.isFilter=true;
+      if (value) {
+        this.coworkerListFiltering = this.states.filter(worker => worker.job === value.split('-')[0].toUpperCase());
+        this.isFilter = true;
+      }
     });
   }
   filterStates(name: string) {
-    if(this.selectedJob !== undefined){
-      const dataList = this.states.filter(worker => worker.job == this.selectedJob.split('-')[0].toUpperCase());
+    if (this.selectedJob !== undefined) {
+      const dataList = this.states.filter(worker => worker.job === this.selectedJob.split('-')[0].toUpperCase());
       return this.filteringData(name, dataList);
-    }
-    else{
+    }else {
       return this.filteringData(name, this.states);
     }
   }
-  filteringData(dataEnter: string, data){
+  filteringData(dataEnter: string, data) {
     this.coworkerListFiltering = data.filter(state =>
     state.name.toLowerCase().indexOf(dataEnter.toLowerCase()) === 0 ||
     state.firstName.toLowerCase().indexOf(dataEnter.toLowerCase()) === 0);
