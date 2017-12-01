@@ -18,7 +18,7 @@
       </mat-autocomplete>
     </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="job">
+        <mat-select placeholder="job" [(ngModel)]="selectedJob" name="job" [formControl]="selectCtrl">
           <mat-option *ngFor="let job of jobs" [value]="job.value">
             {{ job.viewValue }}
           </mat-option>
@@ -31,3 +31,7 @@
     </div>
   </form>
 </div>
+<app-display-data [arrayDataFiltered]="coworkerListFiltering"  [arrayData]="states" [isFilter]="isFilter"
+></app-display-data>
+
+

@@ -7,12 +7,14 @@ import { Component, OnInit, Input} from '@angular/core';
 })
 export class DisplayDataComponent implements OnInit {
   @Input('arrayData') coWorker;
+  @Input('arrayDataFiltered') coWorkerFiltered;
+  @Input('isFilter') isFilter;
 
   constructor() {
   }
 
   ngOnInit() {
-    console.log(JSON.stringify(this.coWorker));
+    console.log(this.isFilter);
   }
 
 }
