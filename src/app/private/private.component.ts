@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators/map';
+import ddpClient from '../app.authMeteorDDP';
 
-
+let MyDdpClient;
 export class State {
   constructor(public name: string, public firstName: string, public job: string,
               public picture: string, public number: [string]) {
@@ -63,6 +64,7 @@ export class PrivateComponent {
   ];
 
   constructor() {
+
     this.nameInputCtrl = new FormControl();
     this.selectCtrl = new FormControl();
     this.numInputCtrl = new FormControl();
@@ -121,6 +123,8 @@ export class PrivateComponent {
     }
     this.coworkerListFiltering = Result;
     console.log('ONCLICKSEARCH ' + JSON.stringify(Result, null, 2));
+
+
   }
 
 }
