@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import { Router } from '@angular/router';
 
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators/map';
@@ -18,7 +19,7 @@ export class State {
 
 export class PrivateComponent {
   selectedJob: string;
-  stateCtrl: FormControl;
+  nameCtrl: FormControl;
   selectCtrl: FormControl;
   filteredStates: Observable<any[]>;
   isFilter: Boolean = false;
@@ -33,41 +34,37 @@ export class PrivateComponent {
     {
       name: 'Basson',
       firstName: 'Julien',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Arkansas.svg
       picture: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg',
       job: 'CTO'
     },
     {
       name: 'Caminale',
       firstName: 'Loic',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_California.svg
       picture: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
       job : 'HR'
     },
     {
       name: 'Nabhan',
       firstName: 'Stéphane',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Florida.svg
       picture: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg',
       job: 'CEO'
     },
     {
       name: 'Ollier',
       firstName: 'Thomas',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Texas.svg
       picture: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
       job : 'HR'
     }
   ];
 
-  constructor() {
-    this.stateCtrl = new FormControl();
+  constructor(public router: Router) {
+    this.nameCtrl = new FormControl();
     this.selectCtrl = new FormControl();
-    this.filteredStates = this.stateCtrl.valueChanges
+    this.filteredStates = this.nameCtrl.valueChanges
       .pipe(
         map((state: string) => state ? this.filterStates(state) : null)
       );
-    this.stateCtrl.valueChanges.subscribe(value => {
+    this.nameCtrl.valueChanges.subscribe(value => {
       this.isFilter = value.length === 0 ? false : true;
       console.log( this.isFilter);
     });
@@ -93,4 +90,8 @@ export class PrivateComponent {
     this.isFilter = this.coworkerListFiltering.length === 0 ? false : true;
     return this.coworkerListFiltering;
   }
+  onClickSearch() {
+    this.router.navigate([ '/details' ]);
 }
+}
+
