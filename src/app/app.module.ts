@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatStepperModule, MatSelectModule} from '@angular/material';
 import { MatInputModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
@@ -14,6 +15,7 @@ import { PrivateComponent } from './private/private.component';
 import { RomanizePipe } from './romanize.pipe';
 import { AuthentificationService } from './authentification.service';
 import { DisplayDataComponent } from './display-data/display-data.component';
+import { ViewDetailsComponent } from './view-details/view-details.component';
 
 
 const appRoutes: Routes = [
@@ -23,7 +25,8 @@ const appRoutes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'private', component: PrivateComponent}
+  { path: 'private', component: PrivateComponent},
+  {path: 'details', component : ViewDetailsComponent}
 ];
 
 @NgModule({
@@ -34,7 +37,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     PrivateComponent,
     RomanizePipe,
-    DisplayDataComponent
+    DisplayDataComponent,
+    ViewDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatStepperModule,
+    MatCardModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
