@@ -8,7 +8,20 @@
     <div *ngIf="isRegister">
       <input type="password" id="confirmPassword" class="form-control" #confirm placeholder="Password">
       <br>
+      <input type="text" id="firstName" class="form-control" #firstName placeholder="Firstname">
+      <br>
+      <input type="text" id="lastName" class="form-control" #lastName placeholder="Lastname">
+      <br>
+      <input type="number" id="number" class="form-control" #number placeholder="Number">
+      <br>
+      <mat-select placeholder="job" class="form-control" [(ngModel)]="selectedJob" name="job" [formControl]="jobControler">
+        <mat-option *ngFor="let job of jobs" [value]="job.value">
+          {{ job.viewValue }}
+        </mat-option>
+      </mat-select>
     </div>
+
+    <br>
 
     <input type="button" class="btn btn-danger btn-block" (click)="reset()" value="Reset" />
     <input type="button" class="btn btn-primary btn-block" (click)="submit()" [value]="submitTitle" />

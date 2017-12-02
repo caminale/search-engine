@@ -13,8 +13,8 @@ export class LoginComponent implements OnInit {
   constructor(public router: Router, public authService: AuthentificationService) { }
 
   ngOnInit() {
-    ddpClient.createDDPObject();
-    ddpClient.connect();
+    // ddpClient.createDDPObject();
+    // ddpClient.connect();
   }
 
   public submit(user) {

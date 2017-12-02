@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import {map} from 'rxjs/operators/map';
 import ddpClient from '../app.authMeteorDDP';
-
-let MyDdpClient;
+let ddpObject;
 export class State {
   constructor(public name: string, public firstName: string, public job: string,
               public picture: string, public number: [string]) {
@@ -19,19 +19,14 @@ export class State {
 
 export class PrivateComponent {
   selectedJob: string;
-  filteredUser: {};
   auCompletedNumList: Observable<any[]>;
   numInputCtrl: FormControl;
   nameInputCtrl: FormControl;
   selectCtrl: FormControl;
-  auCompletedList: Observable<any[]>;
+  auCompletedList: Observable <any[]>;
   coworkerListFiltering: any[];
 
-  jobs = [
-    {value: 'cto-0', viewValue: 'CTO'},
-    {value: 'ceo-1', viewValue: 'CEO'},
-    {value: 'hr-2', viewValue: 'HR'}
-  ];
+
   states: State[] = [
     {
       name: 'Basson',
@@ -64,7 +59,9 @@ export class PrivateComponent {
   ];
 
   constructor() {
-
+    ddpClient.createDDPObject();
+    ddpObject = ddpClient.getDDPObject();
+    ddpClient.connect();
     this.nameInputCtrl = new FormControl();
     this.selectCtrl = new FormControl();
     this.numInputCtrl = new FormControl();
@@ -73,11 +70,18 @@ export class PrivateComponent {
       .pipe(
         map((state: string) => state ? this.filteringDataByNum(state, this.states) : null)
       );
-    this.auCompletedList = this.nameInputCtrl.valueChanges
-      .pipe(
-        map((state: string) => state ? this.filteringDataByName(state, this.states) : null)
-      );
+
+    // this.auCompletedNumList = this.nameInputCtrl.valueChanges
+    //   .pipe(
+    //     map((state: string) => state ? [6] : null)
+    //   );
+
     this.nameInputCtrl.valueChanges.subscribe(value => {
+      if (value.length !== 0) {
+        this.filteringDataByName(value, this.states);
+      }else {
+        this.auCompletedList = null;
+      }
     });
     this.selectCtrl.valueChanges.subscribe(value => {
       if (value) {
@@ -85,10 +89,22 @@ export class PrivateComponent {
     });
   }
 
+
   filteringDataByName(dataEnter: string, data) {
-    return (data.filter(state =>
-      (state.name + ' ' + state.firstName).toLowerCase().indexOf(dataEnter.toLowerCase()) === 0 ||
-      (state.firstName + ' ' + state.name).toLowerCase().indexOf(dataEnter.toLowerCase()) === 0));
+    console.log('Filtering by Name..');
+
+    ddpObject.call(
+      'getDataAutoComplete',             // name of Meteor Method being called
+      [dataEnter],            // parameters to send to Meteor Method
+      function (err, result) {   // callback which returns the method call results
+        if (!err && result) {
+          console.log('succesful getDataAutoComplete : ' + JSON.stringify(result, null, 2));
+          this.auCompletedList = result;
+        }
+      }.bind(this), () => {});
+
+
+
   }
 
   filteringDataByNum(dataEnter: string, data) {
@@ -113,7 +129,7 @@ export class PrivateComponent {
       Result = this.states;
     }
     if (this.nameInputCtrl.value !== null) {
-      Result = this.filteringDataByName(this.nameInputCtrl.value, Result);
+      // Result = this.filteringDataByName(this.nameInputCtrl.value, Result);
     }
 
     console.log(this.numInputCtrl.value);

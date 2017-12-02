@@ -16,7 +16,9 @@ export class RegisterComponent implements OnInit {
   constructor(public authService: AuthentificationService, public router: Router) {}
 
   ngOnInit() {
-    ddpObject = ddpClient.getDDPObject();
+     ddpClient.createDDPObject();
+     ddpObject = ddpClient.getDDPObject();
+     ddpObject.connect();
   }
 
   submit(user) {
@@ -31,7 +33,6 @@ export class RegisterComponent implements OnInit {
       },
       function () {              // callback which fires when server has finished
         console.log('updated');  // sending any updated documents as a result of
-        console.log(ddpObject.collections.posts);  // calling this method
       }
     );
 
