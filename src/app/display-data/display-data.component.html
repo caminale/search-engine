@@ -4,8 +4,8 @@
 
 <ul>
   <li *ngFor="let worker of coWorker">
-    {{ worker.name }}
-    {{worker.firstName}}
-    <img style="vertical-align:middle;" aria-hidden src="{{worker.picture}}" height="25" />
+    {{ worker.profile.firstName }}
+    {{worker.profile.lastName}}
+    <img style="vertical-align:middle;" aria-hidden src="{{worker.profile.pictureLink}}" height="25" />
   </li>
 </ul>
