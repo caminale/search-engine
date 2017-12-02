@@ -29,14 +29,9 @@
         <input matInput placeholder="Number" aria-label="number"
                [matAutocomplete]="numAuto" [formControl]="numInputCtrl">
         <mat-autocomplete #numAuto="matAutocomplete">
-          <mat-option *ngFor="let state of auCompletedNumList | async "
-                      [value]="state.number[0] + ' ' +
-        state.number[1] + ' ' +
-        state.number[2] + ' ' +
-        state.number[3] + ' ' +
-        state.number[4]">
-            <span *ngFor="let indexNum of state.number">{{ indexNum }}</span>
-
+          <mat-option *ngFor="let state of auCompletedNumList"
+                      [value]="state">
+            <span>{{ state }}</span>
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>

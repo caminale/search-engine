@@ -65,16 +65,24 @@ export class PrivateComponent {
     this.nameInputCtrl = new FormControl();
     this.selectCtrl = new FormControl();
     this.numInputCtrl = new FormControl();
-
-    this.auCompletedNumList = this.numInputCtrl.valueChanges
-      .pipe(
-        map((state: string) => state ? this.filteringDataByNum(state, this.states) : null)
-      );
+    //
+    // this.auCompletedNumList = this.numInputCtrl.valueChanges
+    //   .pipe(
+    //     map((state: string) => state ? this.filteringDataByNum(state, this.states) : null)
+    //   );
 
     // this.auCompletedNumList = this.nameInputCtrl.valueChanges
     //   .pipe(
     //     map((state: string) => state ? [6] : null)
     //   );
+
+    this.numInputCtrl.valueChanges.subscribe(value => {
+      if (value.length !== 0) {
+        this.filteringDataByNum(value, this.states);
+      }else {
+        this.auCompletedNumList = null;
+      }
+    });
 
     this.nameInputCtrl.valueChanges.subscribe(value => {
       if (value.length !== 0) {
@@ -108,17 +116,17 @@ export class PrivateComponent {
   }
 
   filteringDataByNum(dataEnter: string, data) {
-    return (data.filter(state =>
-      ( state.number[0] + ' ' +
-        state.number[1] + ' ' +
-        state.number[2] + ' ' +
-        state.number[3] + ' ' +
-        state.number[4]).indexOf(dataEnter.toLowerCase()) === 0 ||
-      ( state.number[0] +
-        state.number[1] +
-        state.number[2] +
-        state.number[3] +
-        state.number[4] ).indexOf(dataEnter.toLowerCase()) === 0));
+    dataEnter = dataEnter.replace(/\s/g, '');
+
+    ddpObject.call(
+      'getNumDataAutoComplete',             // name of Meteor Method being called
+      [dataEnter],            // parameters to send to Meteor Method
+      function (err, result) {   // callback which returns the method call results
+        if (!err && result) {
+          console.log('succesful getNumDataAutoComplete : ' + JSON.stringify(result, null, 2));
+          this.auCompletedNumList = result;
+        }
+      }.bind(this), () => {});
   }
 
   onClickSearch() {
@@ -135,7 +143,7 @@ export class PrivateComponent {
     console.log(this.numInputCtrl.value);
 
     if (this.numInputCtrl.value !== null) {
-      Result = this.filteringDataByNum(this.numInputCtrl.value, Result);
+     // Result = this.filteringDataByNum(this.numInputCtrl.value, Result);
     }
     this.coworkerListFiltering = Result;
     console.log('ONCLICKSEARCH ' + JSON.stringify(Result, null, 2));
