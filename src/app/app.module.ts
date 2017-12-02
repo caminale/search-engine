@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { PrivateComponent } from './private/private.component';
 import { RomanizePipe } from './romanize.pipe';
 import { AuthentificationService } from './authentification.service';
+import { DataManagerService} from './data-manager.service';
 import { DisplayDataComponent } from './display-data/display-data.component';
 import { ViewDetailsComponent } from './view-details/view-details.component';
 
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    AuthentificationService
+    AuthentificationService,
+    DataManagerService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
+import {DataManagerService} from '../data-manager.service';
+
 
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators/map';
@@ -57,7 +59,7 @@ export class PrivateComponent {
     }
   ];
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public dataService: DataManagerService) {
     this.nameCtrl = new FormControl();
     this.selectCtrl = new FormControl();
     this.filteredStates = this.nameCtrl.valueChanges
@@ -91,7 +93,9 @@ export class PrivateComponent {
     return this.coworkerListFiltering;
   }
   onClickSearch() {
-    this.router.navigate([ '/details' ]);
+    // this.router.navigate([ '/details' ]);
+    const lolo = this.dataService.getAll();
+    this.states = lolo;
 }
 }
 
