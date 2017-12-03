@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatStepperModule, MatSelectModule} from '@angular/material';
 import { MatInputModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     BrowserModule,
     MatSelectModule,
     FormsModule,
+    MatButtonModule,
     ReactiveFormsModule,
     MatInputModule,
     BrowserAnimationsModule,
