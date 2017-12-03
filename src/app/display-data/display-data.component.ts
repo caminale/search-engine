@@ -1,4 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
+import { DataManagerService } from '../data-manager.service';
+
 @Component({
   selector: 'app-display-data',
   templateUrl: './display-data.component.html',
@@ -6,9 +8,12 @@ import { Component, OnInit, Input} from '@angular/core';
 })
 export class DisplayDataComponent implements OnInit {
   @Input('arrayDataFiltered') coWorker;
-  constructor() {
+  constructor( public dataService: DataManagerService ) {
   }
   ngOnInit() {
+  }
+  handleClick(user) {
+    this.dataService.setUser(user);
   }
 }
 

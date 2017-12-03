@@ -1,44 +1,36 @@
 import { Injectable } from '@angular/core';
+import ddpClient from './app.authMeteorDDP';
+let ddpObject;
 
 @Injectable()
 export class DataManagerService {
-  private coWorkerList: any[];
-
+  public userProfileData: object;
   constructor() {
-    this.coWorkerList = [
-      {
-        name: 'Basson',
-        firstName: 'Julien',
-        picture: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg',
-        job: 'CTO'
-      },
-      {
-        name: 'Caminale',
-        firstName: 'Loic',
-        picture: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
-        job : 'HR'
-      },
-      {
-        name: 'Nabhan',
-        firstName: 'Stéphane',
-        picture: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg',
-        job: 'CEO'
-      },
-      {
-        name: 'Ollier',
-        firstName: 'Thomas',
-        picture: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
-        job : 'HR'
-      }
-    ];
+    ddpObject = ddpClient.checkConnexion();
+    this.userProfileData = {};
   }
-
-  getById(id) {
-    // return this.coWorkerList.find()
+  getUser() {
+    return this.userProfileData;
   }
-
-  getAll() {
-    return this.coWorkerList;
-
+  setUser(user) {
+    this.userProfileData = user;
   }
+  // async getUserProfileData(userId) {
+  //   try {
+  //     await ddpObject.call(
+  //       'getUserById',             // name of Meteor Method being called
+  //       [userId],            // parameters to send to Meteor Method
+  //       function (err, result) {   // callback which returns the method call results
+  //         if (!err && result) {
+  //           console.log('succesful user by userID : ' + JSON.stringify(result.profile, null, 2));
+  //           this.userProfileData = result;
+  //         }
+  //       }.bind(this), () => {
+  //       });
+  //     console.log('yolo' + JSON.stringify(this.userProfileData));
+  //     return this.userProfileData;
+  //   }catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 }

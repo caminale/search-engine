@@ -1,29 +1,21 @@
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {OnInit, Component} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { OnInit, Component } from '@angular/core';
+import { DataManagerService } from '../data-manager.service';
 @Component({
   selector: 'app-view-details',
   templateUrl: './view-details.component.html',
   styleUrls: ['./view-details.component.css']
 })
 export class ViewDetailsComponent implements OnInit {
-  picture: string;
-  name: string;
-  firstName: string;
-  email: string;
-  phoneNumber: string;
-  sector: string;
-  constructor(private activatedRoute: ActivatedRoute) {
-    this.picture = 'https://material.angular.io/assets/img/examples/shiba2.jpg';
-    this.name = 'Basson';
-    this.firstName = 'Julien';
-    this.email = 'julien.basson@free.fr';
-    this.phoneNumber = '0673621862';
-    this.sector = 'departement1';
+  public user;
+  public email: string;
+  constructor( private activatedRoute: ActivatedRoute, public dataService: DataManagerService ) {
+    this.user = this.dataService.getUser();
+    this.email = this.user.profile.firstName + '.' + this.user.profile.lastName + '@esme.fr';
   }
 
   ngOnInit() {
-    const param1 = this.activatedRoute.snapshot.queryParams["userId"];
-    console.log(param1);
+    // const userId = this.activatedRoute.snapshot.queryParams["userId"];
+    // console.log(userId);
   }
-
 }

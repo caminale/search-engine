@@ -1,0 +1,13 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+.headerTable {
+  color:steelblue;
+  font-family: 'MS Serif';
+}
+.bodyTable {
+  font-family: 'MS Serif';
+}
+.image {
+  height: 42px;
+  width: 42px;
+  border-radius: 10px;
+}

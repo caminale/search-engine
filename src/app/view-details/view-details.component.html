@@ -5,25 +5,24 @@
 
       <div class="dropdown">
         <div class="image-header">
-          <img src="{{picture}}" alt="{{firstName + ' ' + name}}">
+          <img src="{{user.profile.pictureLink}}" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
         </div>
         <div class="dropdown-content">
-          <img src="{{picture}}" alt="{{firstName + ' ' + name}}">
+          <img src="{{user.profile.pictureLink}}"  alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
         </div>
       </div>
-      <mat-card-title><h1>{{firstName + ' ' + name}}</h1></mat-card-title>
+      <mat-card-title><h1>{{user.profile.firstName + ' ' + user.profile.lastName}}</h1></mat-card-title>
       <br>
-      <mat-card-subtitle>{{sector}}</mat-card-subtitle>
+      <mat-card-subtitle>{{user.profile.job.split('-')[0].toUpperCase()}}</mat-card-subtitle>
 
     </div>
   </mat-card-header>
   <br>
   <br>
   <br>
-
   <mat-card-content>
     <h3>Email: </h3><a href="mailto:{{email}}">{{email}}</a><br>
-    <h3>Phone number: </h3>{{phoneNumber}}<br>
+    <h3>Phone number: </h3>{{user.profile.number}}<br>
 
   </mat-card-content>
 </mat-card>
