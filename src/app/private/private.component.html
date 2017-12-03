@@ -6,17 +6,17 @@
   <br>
   <form class="example-form">
     <div class="formContainer">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="co-worker" aria-label="co-worker"
-             [matAutocomplete]="auto" [formControl]="nameCtrl">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let state of filteredStates | async "
-                    [value]="state.firstName + ' ' + state.name">
-          <span>{{ state.firstName }}</span>
-          <span>{{state.name}}</span>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="co-worker" aria-label="co-worker"
+               [matAutocomplete]="auto" [formControl]="nameInputCtrl">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let state of auCompletedList"
+                      [value]="state">
+            <span>{{ state }}</span>
+          </mat-option>
+        </mat-autocomplete>
+
+      </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="job" [(ngModel)]="selectedJob" name="job" [formControl]="selectCtrl">
           <mat-option *ngFor="let job of jobs" [value]="job.value">
@@ -24,14 +24,34 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    <div class="buttons">
-      <button  (click)="onClickSearch()" class="button buttonBlack">Search</button>
-      <button class="button buttonBlack">Search All</button>
-    </div>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Number" aria-label="number"
+               [matAutocomplete]="numAuto" [formControl]="numInputCtrl">
+        <mat-autocomplete #numAuto="matAutocomplete">
+          <mat-option *ngFor="let state of auCompletedNumList | async "
+                      [value]="state.number[0] + ' ' +
+        state.number[1] + ' ' +
+        state.number[2] + ' ' +
+        state.number[3] + ' ' +
+        state.number[4]">
+            <span *ngFor="let indexNum of state.number">{{ indexNum }}</span>
+
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+
+
+      <div class="buttons">
+        <button class="button buttonBlack" (click)="onClickSearch()">Search</button>
+        <button class="button buttonBlack">Search All</button>
+      </div>
     </div>
   </form>
 </div>
-<app-display-data [arrayDataFiltered]="coworkerListFiltering"  [arrayData]="states" [isFilter]="isFilter"
+<app-display-data [arrayDataFiltered]="coworkerListFiltering"
 ></app-display-data>
 
 
