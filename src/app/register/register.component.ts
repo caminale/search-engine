@@ -16,9 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(public authService: AuthentificationService, public router: Router) {}
 
   ngOnInit() {
-     ddpClient.createDDPObject();
-     ddpObject = ddpClient.getDDPObject();
-     ddpObject.connect();
+    ddpObject = ddpClient.checkConnexion();
   }
 
   submit(user) {

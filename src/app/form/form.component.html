@@ -14,6 +14,8 @@
       <br>
       <input type="number" id="number" class="form-control" #number placeholder="Number">
       <br>
+      <input type="text" id="pictureLink" class="form-control" #pictureLink placeholder="Picture link">
+      <br>
       <mat-select placeholder="job" class="form-control" [(ngModel)]="selectedJob" name="job" [formControl]="jobControler">
         <mat-option *ngFor="let job of jobs" [value]="job.value">
           {{ job.viewValue }}

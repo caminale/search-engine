@@ -26,6 +26,7 @@ export class FormComponent implements OnInit {
   @ViewChild('number') number: ElementRef;
   @ViewChild('firstName') firstName: ElementRef;
   @ViewChild('lastName') lastName: ElementRef;
+  @ViewChild('pictureLink') pictureLink: ElementRef;
 
   public isRegister = false;
 
@@ -49,6 +50,7 @@ export class FormComponent implements OnInit {
       payload['job'] =  this.jobControler.value;
       payload['lastName'] = this.lastName.nativeElement.value;
       payload['firstName'] =  this.firstName.nativeElement.value;
+      payload['pictureLink'] =  this.pictureLink.nativeElement.value;
     }
     console.log('payload : ' + JSON.stringify(payload));
     this.onSubmit.emit(payload);

@@ -1,5 +1,5 @@
 import DDPClient from 'ddp-client';
-let ddpclient;
+let ddpclient = null;
 
 export class AuthMeteorDDP {
    static createDDPObject = () => {
@@ -15,6 +15,22 @@ export class AuthMeteorDDP {
       // Use a full url instead of a set of `host`, `port` and `ssl`
       socketConstructor: WebSocket // Another constructor to create new WebSockets
     });
+  }
+
+  static checkConnexion = () => {
+     if (ddpclient == null) {
+       AuthMeteorDDP.createDDPObject();
+       AuthMeteorDDP.connect();
+     }
+    return ddpclient;
+  }
+
+  static disconnect = () => {
+    if (ddpclient != null) {
+      ddpclient.close();
+      ddpclient = null;
+    }
+    return ddpclient;
   }
 
   static getDDPObject = () => {
