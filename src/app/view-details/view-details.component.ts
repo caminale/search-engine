@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {OnInit, Component} from '@angular/core';
 @Component({
   selector: 'app-view-details',
   templateUrl: './view-details.component.html',
@@ -12,7 +12,7 @@ export class ViewDetailsComponent implements OnInit {
   email: string;
   phoneNumber: string;
   sector: string;
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
     this.picture = 'https://material.angular.io/assets/img/examples/shiba2.jpg';
     this.name = 'Basson';
     this.firstName = 'Julien';
@@ -22,6 +22,8 @@ export class ViewDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    const param1 = this.activatedRoute.snapshot.queryParams["userId"];
+    console.log(param1);
   }
 
 }

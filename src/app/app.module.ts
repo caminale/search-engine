@@ -26,7 +26,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'private', component: PrivateComponent},
-  {path: 'details', component : ViewDetailsComponent}
+  {path: 'details/:name', component : ViewDetailsComponent}
 ];
 
 @NgModule({
