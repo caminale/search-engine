@@ -1,6 +1,7 @@
 <div class="container">
+  <mat-card>
   <h1>
-    Welcome to the enterprise directory
+    Enterprise directory
   </h1>
   <br>
   <br>
@@ -39,12 +40,10 @@
 
 
 
-      <div class="buttons">
-        <button class="button buttonBlack" (click)="onClickSearch()">Search</button>
-        <button class="button buttonBlack">Search All</button>
-      </div>
+        <button mat-raised-button  (click)="onClickSearch()">Search</button>
     </div>
   </form>
+  </mat-card>
 </div>
 <app-display-data [arrayDataFiltered]="coworkerListFiltering"
 ></app-display-data>

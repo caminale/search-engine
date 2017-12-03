@@ -33,9 +33,6 @@ export class RegisterComponent implements OnInit {
         console.log('updated');  // sending any updated documents as a result of
       }
     );
-
-    ;
-
     console.log(user);
     this.authService.register(user['username'], user['password'], user['confirmPassword']);
     this.router.navigate([ '/private' ]);

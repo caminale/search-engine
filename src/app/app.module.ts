@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatStepperModule, MatSelectModule} from '@angular/material';
 import { MatInputModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 
@@ -14,6 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { PrivateComponent } from './private/private.component';
 import { RomanizePipe } from './romanize.pipe';
 import { AuthentificationService } from './authentification.service';
+import { DataManagerService} from './data-manager.service';
 import { DisplayDataComponent } from './display-data/display-data.component';
 import { ViewDetailsComponent } from './view-details/view-details.component';
 
@@ -44,6 +46,7 @@ const appRoutes: Routes = [
     BrowserModule,
     MatSelectModule,
     FormsModule,
+    MatButtonModule,
     ReactiveFormsModule,
     MatInputModule,
     BrowserAnimationsModule,
@@ -57,7 +60,8 @@ const appRoutes: Routes = [
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    AuthentificationService
+    AuthentificationService,
+    DataManagerService
   ],
   bootstrap: [AppComponent]
 })

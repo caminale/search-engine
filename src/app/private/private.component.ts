@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import { Router} from '@angular/router';
+import {DataManagerService} from '../data-manager.service';
+
+
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {map} from 'rxjs/operators/map';
