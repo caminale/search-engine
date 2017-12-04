@@ -1,28 +1,30 @@
-<mat-card class="example-card">
-  <mat-card-header>
+<div *ngIf="isUserDefined">
+  <mat-card class="example-card">
+    <mat-card-header>
 
-    <div class="header">
+      <div class="header">
 
-      <div class="dropdown">
-        <div class="image-header">
-          <img src="{{user.profile.pictureLink}}" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
+        <div class="dropdown">
+          <div class="image-header">
+            <img src="{{user.profile.pictureLink}}" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
+          </div>
+          <div class="dropdown-content">
+            <img src="{{user.profile.pictureLink}}"  alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
+          </div>
         </div>
-        <div class="dropdown-content">
-          <img src="{{user.profile.pictureLink}}"  alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
-        </div>
+        <mat-card-title><h1>{{user.profile.firstName + ' ' + user.profile.lastName}}</h1></mat-card-title>
+        <br>
+        <mat-card-subtitle>{{user.profile.job.split('-')[0].toUpperCase()}}</mat-card-subtitle>
+
       </div>
-      <mat-card-title><h1>{{user.profile.firstName + ' ' + user.profile.lastName}}</h1></mat-card-title>
-      <br>
-      <mat-card-subtitle>{{user.profile.job.split('-')[0].toUpperCase()}}</mat-card-subtitle>
+    </mat-card-header>
+    <br>
+    <br>
+    <br>
+    <mat-card-content>
+      <h3>Email: </h3><a href="mailto:{{email}}">{{email}}</a><br>
+      <h3>Phone number: </h3>{{user.profile.number}}<br>
 
-    </div>
-  </mat-card-header>
-  <br>
-  <br>
-  <br>
-  <mat-card-content>
-    <h3>Email: </h3><a href="mailto:{{email}}">{{email}}</a><br>
-    <h3>Phone number: </h3>{{user.profile.number}}<br>
-
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

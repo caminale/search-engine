@@ -1,11 +1,12 @@
 import DDPClient from 'ddp-client';
 let ddpclient = null;
+import BlueBirdPromise from 'bluebird';
 
 export class AuthMeteorDDP {
-   static createDDPObject = () => {
+  static createDDPObject = () => {
     ddpclient = new DDPClient({
       // All properties optional, defaults shown
-      host : '192.168.1.13',
+      host : 'localhost',
       port : 3000,
       ssl  : false,
       autoReconnect : true,
@@ -18,11 +19,25 @@ export class AuthMeteorDDP {
   }
 
   static checkConnexion = () => {
-     if (ddpclient == null) {
-       AuthMeteorDDP.createDDPObject();
-       AuthMeteorDDP.connect();
-     }
-    return ddpclient;
+    return new BlueBirdPromise((resolve, reject) => {
+      if (ddpclient == null) {
+        AuthMeteorDDP.createDDPObject();
+        AuthMeteorDDP.connect()
+          .then(() => {
+            resolve(ddpclient);
+            console.log('SUCCESS promise check connexion : ' + ddpclient);
+          })
+          .catch((err) => {
+            console.log('ERROR catch promise check connexion: ' + err);
+            reject(err);
+          })
+          .finally(() => {
+            console.log('FINALLY check connexion promise');
+          });
+      } else {
+        resolve(ddpclient);
+      }
+    });
   }
 
   static disconnect = () => {
@@ -37,29 +52,34 @@ export class AuthMeteorDDP {
     return ddpclient;
   }
   static connect = () => {
-    ddpclient.connect(function (error, wasReconnect) {
-      // If autoReconnect is true, this callback will be invoked each time
-      // a server connection is re-established
-      if (error) {
-        console.log('DDP connection error!');
-        return;
-      }
+    return new BlueBirdPromise((resolve, reject) => {
+      ddpclient.connect(function (error, wasReconnect) {
+        // If autoReconnect is true, this callback will be invoked each time
+        // a server connection is re-established
+        if (error) {
+          console.log('DDP connection error!');
+          reject()
+          return;
+        }
 
-      if (wasReconnect) {
-        console.log('Reestablishment of a connection.');
-      }
+        if (wasReconnect) {
+          console.log('Reestablishment of a connection.');
+          resolve();
+        }
 
-      console.log('connected!');
-      ddpclient.on('message', function (msg) {
-        console.log('ddp message: ' + msg);
-      });
+        console.log('connected!');
+        resolve();
+        ddpclient.on('message', function (msg) {
+          console.log('ddp message: ' + msg);
+        });
 
-      ddpclient.on('socket-close', function(code, message) {
-        console.log('Close: %s %s', code, message);
-      });
+        ddpclient.on('socket-close', function (code, message) {
+          console.log('Close: %s %s', code, message);
+        });
 
-      ddpclient.on('socket-error', function(error) {
-        console.log('Error: %j', error);
+        ddpclient.on('socket-error', function (error) {
+          console.log('Error: %j', error);
+        });
       });
     });
   }

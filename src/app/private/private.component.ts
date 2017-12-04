@@ -27,7 +27,10 @@ export class PrivateComponent {
 
   ];
   constructor() {
-    ddpObject = ddpClient.checkConnexion();
+    ddpClient.checkConnexion()
+      .then((result) => {
+        ddpObject = result;
+      });
     this.nameInputCtrl = new FormControl();
     this.selectCtrl = new FormControl();
     this.numInputCtrl = new FormControl();
