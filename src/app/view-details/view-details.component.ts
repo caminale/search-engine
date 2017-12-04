@@ -12,7 +12,7 @@ export class ViewDetailsComponent implements OnInit {
   email: string;
   phoneNumber: string;
   sector: string;
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute, public router: Router) {
     this.picture = 'https://material.angular.io/assets/img/examples/shiba2.jpg';
     this.name = 'Basson';
     this.firstName = 'Julien';
@@ -26,4 +26,7 @@ export class ViewDetailsComponent implements OnInit {
     console.log(param1);
   }
 
+  onClickBack() {
+    this.router.navigate([ '/private' ]);
+  }
 }

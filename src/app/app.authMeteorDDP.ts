@@ -5,7 +5,7 @@ export class AuthMeteorDDP {
    static createDDPObject = () => {
     ddpclient = new DDPClient({
       // All properties optional, defaults shown
-      host : '192.168.1.13',
+      host : 'localhost',
       port : 3000,
       ssl  : false,
       autoReconnect : true,
