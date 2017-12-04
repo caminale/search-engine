@@ -1,13 +1,14 @@
 import DDPClient from 'ddp-client';
 let ddpclient = null;
 import BlueBirdPromise from 'bluebird';
+import { environment } from '../environments/environment';
 
 export class AuthMeteorDDP {
   static createDDPObject = () => {
     ddpclient = new DDPClient({
       // All properties optional, defaults shown
-      host : 'localhost',
-      port : 3000,
+      host : environment.serverUrl,
+      port : environment.port,
       ssl  : false,
       autoReconnect : true,
       autoReconnectTimer : 500,
