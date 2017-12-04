@@ -10,7 +10,7 @@
   </thead>
   <tbody class="bodyTable">
   <tr *ngFor="let worker of coWorker" [routerLink]="['/details/profileOf']" [queryParams]="{user: worker.profile.firstName, userId: worker._id}"
-      (click)="handleClick(worker)">
+    >
     <td><img src="{{worker.profile.pictureLink}}" class="image"/></td>
     <td>{{worker.profile.firstName}}</td>
     <td>{{worker.profile.lastName}}</td>

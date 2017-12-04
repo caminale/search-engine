@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthentificationService} from '../authentification.service';
 import { Router } from '@angular/router';
 import ddpClient from '../app.authMeteorDDP';
-
 let ddpObject;
 
 @Component({
@@ -16,7 +15,10 @@ export class RegisterComponent implements OnInit {
   constructor(public authService: AuthentificationService, public router: Router) {}
 
   ngOnInit() {
-    ddpObject = ddpClient.checkConnexion();
+    ddpClient.checkConnexion()
+      .then((result) => {
+        ddpObject = result;
+      });
   }
 
   submit(user) {
