@@ -16,7 +16,6 @@
             <span>{{ state }}</span>
           </mat-option>
         </mat-autocomplete>
-
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="job" [(ngModel)]="selectedJob" name="job" [formControl]="selectCtrl">
@@ -25,7 +24,6 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Number" aria-label="number"
                [matAutocomplete]="numAuto" [formControl]="numInputCtrl">
@@ -45,5 +43,3 @@
 <app-display-data [arrayDataFiltered]="coworkerListFiltering"
 ></app-display-data>
 </div>
-
-

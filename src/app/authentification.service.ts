@@ -43,7 +43,6 @@ export class AuthentificationService {
   register(username, password, confirmPassword) {
     if (password === confirmPassword) {
       this.userList.push({username, password});
-      console.log('Register !');
     }
   }
 

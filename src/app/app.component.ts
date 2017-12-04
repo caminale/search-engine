@@ -8,6 +8,4 @@ import 'reflect-metadata';
 })
 export class AppComponent {
   title = 'app';
-
-
 }

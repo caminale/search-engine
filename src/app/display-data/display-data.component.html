@@ -9,15 +9,15 @@
   </tr>
   </thead>
   <tbody class="bodyTable">
-  <tr *ngFor="let worker of coWorker" [routerLink]="['/details/profileOf']" [queryParams]="{user: worker.profile.firstName, userId: worker._id}"
-    >
+  <tr *ngFor="let worker of coWorker" [routerLink]="['/details/profileOf']"
+      [queryParams]="{user: worker.profile.firstName, userId: worker._id}">
     <td><img src="{{worker.profile.pictureLink}}" class="image"/></td>
     <td>{{worker.profile.firstName}}</td>
     <td>{{worker.profile.lastName}}</td>
     <td>{{worker.profile.number}}</td>
-    <td *ngIf="worker.profile.job!==null">{{worker.profile.job.split('-')[0].toUpperCase()}}</td>
+    <td *ngIf="worker.profile.job!==null">
+      {{worker.profile.job.split('-')[0].toUpperCase()}}
+    </td>
   </tr>
   </tbody>
 </table>
-
-
