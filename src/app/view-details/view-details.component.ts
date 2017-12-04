@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OnInit, Component } from '@angular/core';
 import { getUserProfileData } from '../data-manager.service';
 import ddpClient from '../app.authMeteorDDP';
@@ -15,7 +15,7 @@ export class ViewDetailsComponent implements OnInit {
   public user = '';
   public email: string;
   public isUserDefined = false;
-  constructor( private activatedRoute: ActivatedRoute) {
+  constructor( private activatedRoute: ActivatedRoute, public router: Router ) {
     ddpClient.checkConnexion()
       .then((result) => {
         ddpObject = result;
@@ -42,5 +42,9 @@ export class ViewDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onClickBack() {
+    this.router.navigate([ '/private' ]);
   }
 }
