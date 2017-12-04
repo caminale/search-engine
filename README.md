@@ -2,7 +2,7 @@
 
 # Contents
 * [overview](#overview)
-* [intallation](#intallation)
+* [installation](#installation)
 * [results](#results)
 
 
@@ -12,7 +12,7 @@
 where we can find and see the details about your co-workers.
 The directory has a registration and authentification sytem (provided by Meteor), to add new co-worker to the directory.
 
-# intallation
+# installation
 ## for client side :
 ```
 cd <your-path/client> 
