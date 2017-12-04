@@ -1,18 +1,21 @@
 <table class="table table-hover">
-  <thead>
+  <thead class="headerTable">
   <tr>
-    <td>First name</td>
-    <td>Last Name</td>
-    <td>Number</td>
-    <td>Job</td>
+    <th>Picture</th>
+    <th>First name</th>
+    <th>Last Name</th>
+    <th>Number</th>
+    <th>Job</th>
   </tr>
   </thead>
-  <tbody>
-  <tr *ngFor="let worker of coWorker" [routerLink]="['/details/bob']" [queryParams]="{userId: worker._id}">
+  <tbody class="bodyTable">
+  <tr *ngFor="let worker of coWorker" [routerLink]="['/details/profileOf']" [queryParams]="{user: worker.profile.firstName, userId: worker._id}"
+      (click)="handleClick(worker)">
+    <td><img src="{{worker.profile.pictureLink}}" class="image"/></td>
     <td>{{worker.profile.firstName}}</td>
     <td>{{worker.profile.lastName}}</td>
     <td>{{worker.profile.number}}</td>
-    <td>{{worker.profile.job}}</td>
+    <td *ngIf="worker.profile.job!==null">{{worker.profile.job.split('-')[0].toUpperCase()}}</td>
   </tr>
   </tbody>
 </table>

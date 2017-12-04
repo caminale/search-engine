@@ -1,43 +1,44 @@
 <div class="container">
   <mat-card>
-    <h1>
-      Enterprise directory
-    </h1>
-    <br>
-    <br>
-    <form class="example-form">
-      <div class="formContainer">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="co-worker" aria-label="co-worker"
-                 [matAutocomplete]="auto" [formControl]="nameInputCtrl">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let state of auCompletedList"
-                        [value]="state">
-              <span>{{ state }}</span>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select placeholder="job" [(ngModel)]="selectedJob" name="job"
-                      [formControl]="selectCtrl">
-            <mat-option *ngFor="let job of jobs" [value]="job.value">
-              {{ job.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Number" aria-label="number"
-                 [matAutocomplete]="numAuto" [formControl]="numInputCtrl">
-          <mat-autocomplete #numAuto="matAutocomplete">
-            <mat-option *ngFor="let state of auCompletedNumList"
-                        [value]="state">
-              <span>{{ state }}</span>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <button mat-raised-button (click)="onClickSearch()">Search</button>
-      </div>
-    </form>
+  <h1 class = "title">
+    Enterprise directory
+  </h1>
+  <br>
+  <br>
+  <form class="example-form">
+    <div class="formContainer">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="co-worker" aria-label="co-worker"
+               [matAutocomplete]="auto" [formControl]="nameInputCtrl">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let state of auCompletedList"
+                      [value]="state">
+            <span>{{ state }}</span>
+          </mat-option>
+        </mat-autocomplete>
+
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="job" [(ngModel)]="selectedJob" name="job" [formControl]="selectCtrl">
+          <mat-option *ngFor="let job of jobs" [value]="job.value">
+            {{ job.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Number" aria-label="number"
+               [matAutocomplete]="numAuto" [formControl]="numInputCtrl">
+        <mat-autocomplete #numAuto="matAutocomplete">
+          <mat-option *ngFor="let state of auCompletedNumList"
+                      [value]="state">
+            <span>{{ state }}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+        <button mat-raised-button  (click)="onClickSearch()">Search</button>
+    </div>
+  </form>
   </mat-card>
 </div>
 <app-display-data [arrayDataFiltered]="coworkerListFiltering"

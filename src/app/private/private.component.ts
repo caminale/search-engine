@@ -1,14 +1,8 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { Router} from '@angular/router';
-import {DataManagerService} from '../data-manager.service';
-
-
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {map} from 'rxjs/operators/map';
 import ddpClient from '../app.authMeteorDDP';
-import {forEach} from "@angular/router/src/utils/collection";
 let ddpObject;
 
 @Component({
@@ -60,14 +54,13 @@ export class PrivateComponent {
 
 
   filteringDataByName(dataEnter: string) {
-    console.log('Filtering by Name..');
-
+    // console.log('Filtering by Name..');
     ddpObject.call(
       'getDataAutoComplete',             // name of Meteor Method being called
       [dataEnter],            // parameters to send to Meteor Method
       function (err, result) {   // callback which returns the method call results
         if (!err && result) {
-          console.log('succesful getDataAutoComplete : ' + JSON.stringify(result, null, 2));
+          // console.log('succesful getDataAutoComplete : ' + JSON.stringify(result, null, 2));
           this.auCompletedList = result;
         }
       }.bind(this), () => {});
@@ -81,7 +74,7 @@ export class PrivateComponent {
       [dataEnter],            // parameters to send to Meteor Method
       function (err, result) {   // callback which returns the method call results
         if (!err && result) {
-          console.log('succesful getNumDataAutoComplete : ' + JSON.stringify(result, null, 2));
+          // console.log('succesful getNumDataAutoComplete : ' + JSON.stringify(result, null, 2));
           this.auCompletedNumList = result;
         }
       }.bind(this), () => {});
