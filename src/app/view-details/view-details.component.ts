@@ -24,20 +24,15 @@ export class ViewDetailsComponent implements OnInit {
             this.user = userResult;
             this.email = userResult.profile.firstName + '.' + userResult.profile.lastName + '@esme.fr';
             this.isUserDefined = true;
-            console.log('SUCCESS promise : ' + userResult);
           })
           .catch((err) => {
-            console.log('ERROR catch promise : ' + err);
           })
           .finally(() => {
-            console.log('FINALLY promise');
           });
       })
       .catch((err) => {
-        console.log('ERROR catch promise check connexion: ' + err);
       })
       .finally(() => {
-        console.log('FINALLY check connexion promise');
       });
   }
 

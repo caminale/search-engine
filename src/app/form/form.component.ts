@@ -1,13 +1,11 @@
 import { Component, EventEmitter, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
-
 @Component({
   templateUrl: './form.component.html',
   selector: 'app-form', // Name of the HTML element
   styleUrls: ['./form.component.css']
 })
-
 
 export class FormComponent implements OnInit {
 
@@ -52,7 +50,6 @@ export class FormComponent implements OnInit {
       payload['firstName'] =  this.firstName.nativeElement.value;
       payload['pictureLink'] =  this.pictureLink.nativeElement.value;
     }
-    console.log('payload : ' + JSON.stringify(payload));
     this.onSubmit.emit(payload);
   }
 

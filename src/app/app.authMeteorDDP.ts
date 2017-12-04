@@ -25,14 +25,11 @@ export class AuthMeteorDDP {
         AuthMeteorDDP.connect()
           .then(() => {
             resolve(ddpclient);
-            console.log('SUCCESS promise check connexion : ' + ddpclient);
           })
           .catch((err) => {
-            console.log('ERROR catch promise check connexion: ' + err);
             reject(err);
           })
           .finally(() => {
-            console.log('FINALLY check connexion promise');
           });
       } else {
         resolve(ddpclient);
@@ -57,17 +54,14 @@ export class AuthMeteorDDP {
         // If autoReconnect is true, this callback will be invoked each time
         // a server connection is re-established
         if (error) {
-          console.log('DDP connection error!');
           reject()
           return;
         }
 
         if (wasReconnect) {
-          console.log('Reestablishment of a connection.');
           resolve();
         }
 
-        console.log('connected!');
         resolve();
         ddpclient.on('message', function (msg) {
           console.log('ddp message: ' + msg);

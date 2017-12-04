@@ -1,31 +1,40 @@
 <div id="form">
   <form novalidate role="form" class="form-signin">
     <h2 class="form-signin-heading">{{submitTitle}}</h2>
-    <input type="text" id="username" class="form-control" #username placeholder="Username" autofocus />
+    <input type="text" id="username" class="form-control" #username
+           placeholder="Username" autofocus/>
     <br>
-    <input type="password" id="password" class="form-control" #password placeholder="Password">
+    <input type="password" id="password" class="form-control" #password
+           placeholder="Password">
     <br>
     <div *ngIf="isRegister">
-      <input type="password" id="confirmPassword" class="form-control" #confirm placeholder="Password">
+      <input type="password" id="confirmPassword" class="form-control" #confirm
+             placeholder="Password">
       <br>
-      <input type="text" id="firstName" class="form-control" #firstName placeholder="Firstname">
+      <input type="text" id="firstName" class="form-control" #firstName
+             placeholder="Firstname">
       <br>
-      <input type="text" id="lastName" class="form-control" #lastName placeholder="Lastname">
+      <input type="text" id="lastName" class="form-control" #lastName
+             placeholder="Lastname">
       <br>
-      <input type="number" id="number" class="form-control" #number placeholder="Number">
+      <input type="number" id="number" class="form-control" #number
+             placeholder="Number">
       <br>
-      <input type="text" id="pictureLink" class="form-control" #pictureLink placeholder="Picture link">
+      <input type="text" id="pictureLink" class="form-control" #pictureLink
+             placeholder="Picture link">
       <br>
-      <mat-select placeholder="job" class="form-control" [(ngModel)]="selectedJob" name="job" [formControl]="jobControler">
+      <mat-select placeholder="job" class="form-control"
+                  [(ngModel)]="selectedJob" name="job"
+                  [formControl]="jobControler">
         <mat-option *ngFor="let job of jobs" [value]="job.value">
           {{ job.viewValue }}
         </mat-option>
       </mat-select>
     </div>
-
     <br>
-
-    <input type="button" class="btn btn-danger btn-block" (click)="reset()" value="Reset" />
-    <input type="button" class="btn btn-primary btn-block" (click)="submit()" [value]="submitTitle" />
+    <input type="button" class="btn btn-danger btn-block" (click)="reset()"
+           value="Reset"/>
+    <input type="button" class="btn btn-primary btn-block" (click)="submit()"
+           [value]="submitTitle"/>
   </form>
 </div>
